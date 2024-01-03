@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PriceCommand {
-    List<Price> execute(Brand brand, Product product, LocalDateTime date);
+    Price execute(Brand brand, Product product, LocalDateTime date);
 }
