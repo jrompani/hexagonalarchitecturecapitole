@@ -7,7 +7,7 @@ import com.app.hexarchitecture.capitole.domain.model.entity.Brand;
 import com.app.hexarchitecture.capitole.domain.model.entity.Price;
 import com.app.hexarchitecture.capitole.domain.model.entity.Product;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -16,6 +16,7 @@ import java.util.Comparator;
 @Slf4j
 public class PriceCommandService implements PriceCommand {
 
+    @Autowired
     private final PriceRepository priceRepository;
 
     public PriceCommandService(PriceRepository priceRepository) {

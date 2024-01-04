@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 @Builder
 public record Response<T,E>(LocalDateTime timeStamp, T data, E error, boolean success) {
@@ -21,7 +22,16 @@ public record Response<T,E>(LocalDateTime timeStamp, T data, E error, boolean su
         return ResponseEntity.status(httpStatus).body(Response.<T, E>builder().success(false).error(error).build());
     }
 
-    public ResponseEntity<Response<T, E>> toResponseEntity(HttpStatus status) {
+    public static <T, E> Response<T, E> error(E error) {
+        return Response.<T, E>builder()
+                .success(false)
+                .data(null)
+                .error(error)
+                .build();
+    }
+
+        public ResponseEntity<Response<T, E>> toResponseEntity(HttpStatus status) {
         return new ResponseEntity<>(this, status);
     }
+
 }

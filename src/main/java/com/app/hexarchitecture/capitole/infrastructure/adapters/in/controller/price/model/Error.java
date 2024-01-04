@@ -3,5 +3,5 @@ package com.app.hexarchitecture.capitole.infrastructure.adapters.in.controller.p
 import lombok.Builder;
 
 @Builder
-public record Error(String code, String error) {
+public record Error(String code, String error, String cause) {
 }
