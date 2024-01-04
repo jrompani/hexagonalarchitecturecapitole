@@ -2,7 +2,7 @@ package com.app.hexarchitecture.capitole.infrastructure.exception;
 
 import com.app.hexarchitecture.capitole.application.exceptions.ResourceNotAvailableException;
 import com.app.hexarchitecture.capitole.infrastructure.adapters.in.controller.price.model.Response;
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -13,13 +13,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.Objects;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
-
-    private final Logger logger;
-
-    public GlobalExceptionHandler(Logger logger) {
-        this.logger = logger;
-    }
 
     @ExceptionHandler(value = {ResourceNotAvailableException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
@@ -35,7 +30,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Response<Object, Error> handleUncaughtException(final Exception e) {
-        logger.error("Uncaught exception", e);
+        log.error("Uncaught exception", e);
         return Response.error(
                 Error.builder()
                         .code("uncaughtException")
